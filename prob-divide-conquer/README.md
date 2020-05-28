@@ -4,7 +4,7 @@ O(logN) time, passes tests, works fine
 
 ### 2. sorted-frequency
 
-O(logN) (?) time, passes tests, breaks for larger inputs. Need revision
+O(logN) (?) time, passes tests, breaks for larger inputs. Needs revision
 
 ### 3. find-floor
 
