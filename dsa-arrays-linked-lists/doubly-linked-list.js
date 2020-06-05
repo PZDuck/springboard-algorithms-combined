@@ -1,7 +1,7 @@
 /** Node: node for a doublt linked list. */
 
 class Node {
-    constructor(val, prev=null, next=null) {
+    constructor({val, prev=null, next=null}) {
       this.val = val
       this.next = next
       this.prev = prev
@@ -25,7 +25,7 @@ class Node {
             return
         }
 
-        this.tail = new Node(val=val, prev=this.tail)
+        this.tail = new Node({val: val, prev: this.tail})
         this.tail = this.tail.next
         this.length++
     }
@@ -38,7 +38,7 @@ class Node {
             return
         }
 
-        let temp = new Node(val=val, next=this.head)
+        let temp = new Node({val: val, next: this.head})
         this.head = temp
         this.length++
     }
@@ -128,7 +128,7 @@ class Node {
       }
       if (!curr) throw new Error("Invalid Index")
       
-      prev.next = new Node(val, curr)
+      prev.next = new Node({val: val, next: curr})
       this.length++
     }
     
