@@ -50,7 +50,6 @@ Unevenly-nested squares can be added::
 
 def add(s1, s2):
     """Produce new split square adding two input squares."""
-    # Not working
     
     if isinstance(s1, int) and isinstance(s2, int):
         return s1 or s2
