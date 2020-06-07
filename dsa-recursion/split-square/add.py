@@ -55,10 +55,20 @@ def add(s1, s2):
     if isinstance(s1, int) and isinstance(s2, int):
         return s1 or s2
 
-    if isinstance(s1, list):
-        return [add(s1[i], s2[i]) for i in range(len(s1))]
-    elif isinstance(s2, list):
-        return [add(s1[i], s2[i]) for i in range(len(s2))]
+    # Initial, wrong
+
+    # if isinstance(s1, list):
+    #     return [add(s1[i], s2[i]) for i in range(len(s1))]
+    # elif isinstance(s2, list):
+    #     return [add(s1[i], s2[i]) for i in range(len(s2))]
+
+    # Correct
+    if isinstance(s1, int):
+        s1 = [s1 for i in range(4)]
+    if isinstance(s2, int):
+        s2 = [s2 for i in range(4)]
+    
+    return [add(s1[i], s2[i]) for i in range(4)]
 
 if __name__ == "__main__":
     import doctest
