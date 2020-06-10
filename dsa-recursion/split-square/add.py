@@ -57,9 +57,9 @@ def add(s1, s2):
     # Initial, wrong
 
     # if isinstance(s1, list):
-    #     return [add(s1[i], s2[i]) for i in range(len(s1))]
+    #     return [add(s1[i], s2[i]) for i in range(4)]
     # elif isinstance(s2, list):
-    #     return [add(s1[i], s2[i]) for i in range(len(s2))]
+    #     return [add(s1[i], s2[i]) for i in range(4)]
 
     # Correct
     if isinstance(s1, int):

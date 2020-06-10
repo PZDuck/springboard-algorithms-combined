@@ -118,3 +118,33 @@ if __name__ == '__main__':
     import doctest
     if doctest.testmod().failed == 0:
         print("\n*** ALL TESTS PASSED; YOU FOUND SUCCESS! ***\n")
+
+
+"""
+LeetCode Word Search Attempt
+
+class Solution:
+    def __init__(self):
+        self.sides = [(-1,0),(0,1),(1,0),(0,-1)]
+        
+    def checkPos(self, board, word, i, j, curr, s=""):
+        for k in self.sides:
+            if i+k[0] < 0 or j+k[1] < 0 or i+k[0] >= len(board) or j+k[1] >= len(board):
+                continue
+                
+            if word[curr] == board[i+k[0]][j+k[1]]:
+                s += board[i+k[0]][j+k[1]]
+                curr -= 1
+                return self.checkPos(board,word,i+k[0],j+k[1],curr,s)
+        return s
+    
+    def findWords(self, board: List[List[str]], words: List[str]) -> List[str]:
+        out = []
+        for i in words:
+            curr = len(i) - 1
+            for row in range(len(board)-1):
+                for letter in range(len(board[row])-1):
+                    if self.checkPos(board,i,row,letter,curr) == i[::-1]:
+                        out.append(i)
+        return out
+"""
