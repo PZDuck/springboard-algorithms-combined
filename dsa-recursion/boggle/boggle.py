@@ -111,8 +111,27 @@ def make_board(board_string):
 
 def find(board, word):
     """Can word be found in board?"""
-    
+    for i in range(len(board)):
+        for j in range(len(board[0])):
+            if board[i][j] and search(board, i, j, word):
+                return True
+    return False
 
+def search(board, i, j, word, count=0):
+    if count == len(word):
+        return True
+    
+    if (i < 0 or j < 0 or i >= len(board) or j >= len(board[0]) or board[i][j] != word[count]):
+        return False
+
+    curr = board[i][j]
+    board[i][j] = '#'
+
+    found = search(board, i + 1, j, word, count + 1) or search(board, i - 1, j, word, count + 1) or \
+        search(board, i, j + 1, word, count + 1) or search(board, i, j - 1, word, count + 1)    
+
+    board[i][j] = curr
+    return found
 
 if __name__ == '__main__':
     import doctest
@@ -121,7 +140,7 @@ if __name__ == '__main__':
 
 
 """
-LeetCode Word Search Attempt
+LeetCode Word Search II Attempt
 
 class Solution:
     def __init__(self):
@@ -147,4 +166,78 @@ class Solution:
                     if self.checkPos(board,i,row,letter,curr) == i[::-1]:
                         out.append(i)
         return out
+"""
+
+"""
+LeetCode Word Search Second Attempt (Using Trie)
+
+class Node:
+    def __init__(self, val=""):
+        self.val = val
+        self.complete = False
+        self.pointers = [None for i in range(26)]
+        
+    def get(self, letter: str) -> str:
+        for i in self.pointers:
+            if i:
+                if letter == i.val:
+                    return i
+            
+        return None
+
+
+class Trie:
+
+    def __init__(self):
+        self.root = Node()
+
+    def insert(self, word: str) -> None:
+        current = self.root
+        for i in range(len(word)):
+            loc = ord(word[i]) - 97
+            if not current.pointers[loc]:
+                current.pointers[loc] = Node(word[i])
+            current = current.pointers[loc]
+        
+        current.complete = True
+
+
+class Solution:
+    def findWords(self, board: List[List[str]], words: List[str]) -> List[str]:
+        trie = Trie()
+        out = []
+        pointer = trie.root
+        
+        for word in words:
+            trie.insert(word)
+        
+        for i in range(len(board)):
+            for j in range(len(board[0])):
+                self.search(board, pointer, i, j, "", out)
+        
+        return out
+    
+    def search(self, board, pointer, i, j, path, out):
+        if pointer.complete:
+            out.append(path)
+            pointer.complete = False
+        
+        if i < 0 or j < 0 or i >= len(board) - 1 or j >= len(board[0]):
+            return
+        
+        curr = board[i][j]
+        pointer = pointer.get(curr)
+        
+        if not pointer:
+            return
+        
+        board[i][j] = "#"
+        
+        self.search(board, pointer, i + 1, j, path + curr, out)
+        self.search(board, pointer, i - 1, j, path + curr, out)
+        self.search(board, pointer, i, j + 1, path + curr, out)
+        self.search(board, pointer, i, j - 1, path + curr, out)
+        
+        board[i][j] = curr
+
 """
